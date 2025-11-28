@@ -6,10 +6,17 @@
       <h1 class="text-2xl font-bold mb-4">Vocabulary Test</h1>
 
       <p>Translation Direction:</p>
-      <div class="toggle-wrapper">
-        <button class="toggle-btn" :class="{ active: mode==='german-to-english' }" @click="mode='german-to-english'">German → English</button>
-        <button class="toggle-btn" :class="{ active: mode==='english-to-german' }" @click="mode='english-to-german'">English → German</button>
-      </div>
+<div class="mode-select-wrapper">
+  <label class="mode-label">Select Test Mode</label>
+  <select v-model="mode" class="mode-dropdown">
+    <option value="german-to-english">German → English</option>
+    <option value="english-to-german">English → German</option>
+    <option value="english-to-vietnamese">English → Vietnamese</option>
+    <option value="vietnamese-to-english">Vietnamese → English</option>
+    <option value="vietnamese-to-german">Vietnamese → German</option>
+    <option value="german-to-vietnamese">German → Vietnamese</option>
+  </select>
+</div>
 
       <p>How many words?</p>
       <div class="count-wrapper">
@@ -250,6 +257,38 @@ export default {
 }
 ::v-deep(.feedback.wrong) {
   color: #dc2626 !important;
+}
+
+
+
+
+.mode-select-wrapper {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.mode-dropdown {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid #d0d0d0;
+  background: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;     
+  text-align-last: center; 
+}
+
+.mode-dropdown:focus {
+  border-color: #6c63ff;
+  outline: none;
 }
 </style>
 

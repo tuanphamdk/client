@@ -9,6 +9,7 @@
           <tr>
             <th>English</th>
             <th>German</th>
+            <th>Vietnamese</th>
             <th colspan="2">Menu</th>
             <th>
               <a @click.prevent="onDeleteMany()" class="ui blue button"> Delete All</a>
@@ -19,6 +20,7 @@
           <tr v-for="(word,index) in paginatedWords" :key="word._id">
             <td>{{ word.english }}</td>
             <td>{{ word.german }}</td>
+            <td>{{ word.vietnamese }}</td>
             <td width="75">
               <router-link class="ui button green" :to="{name: 'Show', params:{id:word._id}}">Show</router-link>
             </td>
