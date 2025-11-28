@@ -1,41 +1,128 @@
 <template>
-  <div class="ui inverted segment navbar">
-    <div class="ui center aligned container">
-      <div class="ui large secondary inverted pointing menu compact">
-        <router-link to="/words" class="item">
-          <i class="list icon"></i> Words
-        </router-link>
+  <div>
+    <!-- Navbar -->
+    <div class="ui inverted segment navbar">
+      <div class="ui center aligned container">
+        <div class="ui large secondary inverted pointing menu compact">
 
-        <router-link to="/words/new" class="item">
-          <i class="plus icon"></i> New
-        </router-link>
+          <!-- Luôn hiển thị -->
+          <router-link v-if="isLoggedIn"  to="/words" class="item" >
+            <i class="list icon"></i> Words
+          </router-link>
+          <router-link to="/words/new" class="item" v-if="isLoggedIn">
+            <i class="plus icon"></i> New
+          </router-link>
+          <router-link v-if="!isLoggedIn" to="/about" class="item">
+            <i class="info circle icon"></i> About
+          </router-link>
 
-        <router-link to="/about" class="item">
-          <i class="wheelchair icon"></i> About
-        </router-link>
+          <!-- Chỉ hiển thị khi chưa login -->
+          <router-link v-if="!isLoggedIn" to="/login" class="item">
+            <i class="sign-in icon"></i> Login
+          </router-link>
+          <router-link v-if="!isLoggedIn" to="/register" class="item">
+            <i class="user plus icon"></i> Register
+          </router-link>
 
-        <router-link to="/login" class="item">
-          <i class="wheelchair icon"></i> Login
-        </router-link>
 
-      </div>
-    </div>
-  </div>
+          <!-- Chỉ hiển thị khi đã login -->
+          <router-link to="/test" class="item" v-if="isLoggedIn">
+            <i class="edit icon"></i> Test
+          </router-link>
+          <router-link v-if="isLoggedIn" to="/personal" class="item">
+            <i class="user icon"></i> {{ username }}
+          </router-link>
 
-  <div class="ui container">
-    <div class="ui grid">
-      <div class="row">
-        <div class="twelve wide columns">
-          <router-view></router-view>
+          <!-- <a v-if="isLoggedIn" @click.prevent="logout" class="item">
+            <i class="sign-out icon"></i> Logout
+          </a> -->
         </div>
       </div>
     </div>
+
+    <!-- Router View -->
+    <div class="ui container" style="display: flex; justify-content: center">
+      <div class="form-container">
+        <div class="form-card">
+              <router-view></router-view>
+      </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import jwt_decode from 'jwt-decode';
+
 export default {
-  name: 'About'
-}
+  name: "App",
+  data() {
+    return {
+      isLoggedIn: !!localStorage.getItem("token"),
+      username: '' // biến để hiển thị tên user
+    };
+  },
+  created() {
+    this.updateUserName();
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      this.isLoggedIn = false;
+      this.username = '';
+      this.$router.push("/login");
+    },
+    updateUserName() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const decoded = jwt_decode(token);
+          this.username = decoded.username || decoded.name || '';
+        } catch (err) {
+          console.error("Failed to decode token:", err);
+          this.username = '';
+        }
+      } else {
+        this.username = '';
+      }
+    }
+  },
+  watch: {
+    $route() {
+      this.isLoggedIn = !!localStorage.getItem("token");
+      this.updateUserName();
+    }
+  }
+};
 </script>
 
+<style scoped>
+/* Navbar basic styling */
+.ui.inverted.segment.navbar {
+  margin-bottom: 20px;
+}
+.ui.labeled.input .ui.label {
+  display: flex;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 700;
+}
+
+.form-card {
+  background: white;
+  border: 2px solid #d1d5db;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 2rem;
+  max-width: 700;
+  width: 80%;
+  text-align: center;
+}
+
+</style>

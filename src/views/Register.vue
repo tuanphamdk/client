@@ -1,52 +1,58 @@
 <template>
   <div class="form-container">
     <div class="form-card">
-      <h1>Login</h1>
-      <form @submit.prevent="onLogin">
+      <h1>Register</h1>
+      <form @submit.prevent="onRegister">
+        <div class="input-group">
+          <label>Username</label>
+          <input v-model="username" placeholder="Username" required />
+        </div>
+
         <div class="input-group">
           <label>Email</label>
-          <input type="email" placeholder="Email" v-model="email" required />
+          <input v-model="email" placeholder="Email" required />
         </div>
 
         <div class="input-group">
           <label>Password</label>
-          <input type="password" placeholder="Password" v-model="password" required />
+          <input type="password" v-model="password" placeholder="Password" required />
         </div>
 
-        <button type="submit" class="submit-btn">Login</button>
+        <button type="submit" class="submit-btn">Register</button>
       </form>
     </div>
   </div>
 </template>
 
-
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { login } from '@/helpers/api'; 
+import { register } from '@/helpers/api'; 
 
 export default {
   setup() {
     const router = useRouter();
+    const username = ref('');
     const email = ref('');
     const password = ref('');
 
-    const onLogin = async () => {
-      const result = await login(email.value, password.value);
-      if (result && result.token) {
-        localStorage.setItem('token', result.token);
-        router.push('/words');
+    const onRegister = async () => {
+      const result = await register(username.value, email.value, password.value);
+      if (result) {
+        alert('Register success! Please login.');
+        router.push('/login');
       } else {
-        alert('Login failed! Please check your email/password.');
+        alert('Register failed! Please try again.');
       }
     };
 
-    return { email, password, onLogin };
+    return { username, email, password, onRegister };
   }
 };
 </script>
 
 <style scoped>
+
 
 .form-card {
   padding: 2rem;

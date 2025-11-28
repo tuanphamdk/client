@@ -1,129 +1,23 @@
-// //import axios library
-// import axios from "axios";
-
-// // define backend API endpoint (URL)
-// // const backendUrl = "http://localhost:3000/api/vocabs/"
-// const backendUrl = "https://gereng.onrender.com/api/vocabs"
-// // const backendCloud = "https://mybackend.com"
-
-// // declare function to call API
-// export const viewAllVocabs = async()=>{
-//     try{
-//         const response = await axios.get(backendUrl);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const getAllVocabById = async(id)=>{
-//     try{
-//         const response = await axios.get(backendUrl + id);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const createNewVocab = async(payload)=>{
-//     try{
-//         const response = await axios.post(backendUrl, payload);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const deleteAllVocab = async()=>{
-//     try{
-//         const response = await axios.delete(backendUrl);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const updateVocab = async(id,word)=>{
-//     try{
-//         const response = await axios.put(backendUrl + id, word);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const deleteVocabById = async(id)=>{
-//     try{
-//         const response = await axios.delete(backendUrl + id);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-
-// export const searchVocabByName = async(keyword)=>{
-//     try{
-//         const response = await axios.get(backendUrl + keyword);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const sortAsc = async()=>{
-//     try{
-//         const response = await axios.get(backendUrl);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// export const sortDesc = async()=>{
-//     try{
-//         const response = await axios.get(backendUrl);
-//         return response.data;
-//     } catch(err){
-//         console.error(err);
-//         return null;
-//     }
-// }
-
-// // export const addNewWord = async (word) =>{
-// //     try{
-// //         const response = await axios.post(backendUrl, word);
-// //         return response.data;
-// //     } catch(err){
-// //         console.error(err);
-// //         return null;
-// //     }
-// // }
-
-
-// // export const editWord = async(id,word) =>{
-// //     try{
-// //         const response = await axios.put(backendUrl + id,word);
-// //         return response.data;
-// //     }
-// //     catch(err){
-// //         console.error(err);
-// //         return null;
-// //     }
-// // }
 
 import axios from "axios";
 
 // Base API URL
-const backendUrl = "https://gereng.onrender.com/api";
+// const hostname = window.location.hostname;
+// const backendUrl = (hostname === 'localhost' || hostname === '127.0.0.1')
+//     ? 'http://localhost:3000/api'
+//     : 'https://gereng.onrender.com/api';
+
+export const backendUrl = "http://localhost:3000/api";
+
+    axios.interceptors.request.use(config => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+
 
 // Get all vocabs
 export const viewAllVocabs = async () => {
@@ -191,35 +85,40 @@ export const deleteVocabById = async (id) => {
   }
 };
 
-// Search vocab by name
-export const searchVocabByName = async (keyword) => {
+// Login
+export const login = async (email, password) => {
   try {
-    const response = await axios.get(`${backendUrl}/vocabs/search/${keyword}`);
-    return response.data;
+    const response = await axios.post(`${backendUrl}/auth/login`, { email, password });
+    return response.data; // { token, user }
   } catch (err) {
     console.error(err);
     return null;
   }
 };
 
-// Sort ascending
-export const sortAsc = async () => {
+// Register
+export const register = async (username, email, password) => {
   try {
-    const response = await axios.get(`${backendUrl}/vocabs?sort=asc`);
-    return response.data;
+    const response = await axios.post(`${backendUrl}/auth/register`, { username, email, password });
+    return response.data; // { message, user }
   } catch (err) {
     console.error(err);
     return null;
   }
 };
 
-// Sort descending
-export const sortDesc = async () => {
+// Test vocab
+export const testVocab = async (mode = "english-to-german", limit = 5) => {
   try {
-    const response = await axios.get(`${backendUrl}/vocabs?sort=desc`);
-    return response.data;
+    const response = await axios.get(`${backendUrl}/vocabs/test-vocab`, {
+      params: { mode, limit },
+    });
+    return response.data; // { requested, returned, mode, vocabs: [...] }
   } catch (err) {
     console.error(err);
     return null;
   }
 };
+
+
+
