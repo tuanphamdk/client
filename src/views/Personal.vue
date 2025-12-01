@@ -17,7 +17,7 @@
 <script>
 import { ref } from 'vue';
 import jwt_decode from 'jwt-decode';
-
+import Swal from 'sweetalert2';
 export default {
   setup() {
     const user = ref({ username: 'N/A', email: 'N/A' });
@@ -33,10 +33,23 @@ export default {
       }
     }
 
-    const logout = () => {
-      localStorage.removeItem("token");
-      window.location.href = '/login';
-    };
+const logout = async () => {
+  const result = await Swal.fire({
+    title: "Are you sure you want to logout?",
+    text: "You will need to login again.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout!",
+  });
+
+  if (result.isConfirmed) {
+    localStorage.removeItem("token");
+    window.location.href = '/login';
+  }
+};
+
 
     return { user, logout };
   }

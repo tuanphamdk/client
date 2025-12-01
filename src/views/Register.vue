@@ -27,7 +27,8 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { register } from '@/helpers/api'; 
+import { register } from '@/helpers/api';
+import Swal from "sweetalert2"; 
 
 export default {
   setup() {
@@ -36,15 +37,28 @@ export default {
     const email = ref('');
     const password = ref('');
 
-    const onRegister = async () => {
-      const result = await register(username.value, email.value, password.value);
-      if (result) {
-        alert('Register success! Please login.');
-        router.push('/login');
-      } else {
-        alert('Register failed! Please try again.');
-      }
-    };
+const onRegister = async () => {
+  const result = await register(username.value, email.value, password.value);
+
+  if (result.error) {
+    // Hiển thị lỗi từ backend
+    Swal.fire({
+      icon: "error",
+      title: "Register Failed",
+      text: result.error,
+      confirmButtonText: "OK"
+    });
+  } else {
+    Swal.fire({
+      icon: "success",
+      title: "Register Success",
+      text: "Please login.",
+      confirmButtonText: "OK"
+    }).then(() => {
+      router.push("/login");
+    });
+  }
+};
 
     return { username, email, password, onRegister };
   }

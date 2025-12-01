@@ -8,7 +8,8 @@
   import Login from "./views/Login.vue";
   import Register from "./views/Register.vue";
   import Personal from "./views/Personal.vue";
-  import VocabTest from "@/views/Vocabtest.vue"; 
+  import VocabTest from "@/views/Vocabtest.vue";
+  import VocabMC from  "@/views/VocabMC.vue";
 
 
 
@@ -16,7 +17,7 @@
 
 
   const routes = [
-    { path: '/', redirect: '/words' },
+    { path: '/', redirect: '/About' },
 
     { path: '/words', name: 'Words', component: Words },
     { path: '/words/new', name: 'New', component: New },
@@ -28,7 +29,8 @@
     { path: '/login', name: 'Login', component: Login },
     { path: '/register', name: 'Register', component: Register },
     { path: '/personal', name: 'Personal', component: Personal },
-    { path: "/test", name: "Test", component: VocabTest }
+    { path: "/test", name: "Test", component: VocabTest },
+    { path: "/testMC", name: "TestMC", component: VocabMC }
 
   ];
 

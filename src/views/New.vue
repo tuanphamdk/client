@@ -13,6 +13,11 @@
           <input type="text" required v-model="word.german">
         </div>
 
+                        <div class="input-group">
+          <label><i class="vietnam flag"></i> Vietnamese</label>
+          <input type="text" required v-model="word.vietnamese" />
+        </div>
+
         <button class="submit-btn">Submit</button>
       </form>
     </div>

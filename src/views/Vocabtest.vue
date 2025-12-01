@@ -36,7 +36,7 @@
       <div>{{ currentQuestion.question }}</div>
       <input type="text" v-model="userAnswer" @keyup.enter="submitAnswer"/>
       <div class="button-wrapper">
-        <button class="submit-btn" @click="submitAnswer">Submit</button>
+        <button class="submit-btn" @click="submitAnswer" :disabled="!userAnswer">Submit</button>
         <button class="next-btn" :disabled="!answered" @click="nextQuestion">Next</button>
       </div>
       <p class="feedback" :class="correct?'correct':'wrong'" v-if="feedback">{{ feedback }}</p>
@@ -57,7 +57,7 @@
 <script>
 import { ref, computed } from "vue";
 import axios from "axios";
-import { backendUrl } from "@/helpers/api";
+import { testVocab } from "@/helpers/api";
 
 export default {
   name: "VocabTest",
@@ -77,25 +77,23 @@ export default {
       return questions.value[currentIndex.value] || {};
     });
 
-    const startTest = async () => {
-      try {
-        const res = await axios.get(`${backendUrl}/vocabs/test-vocab`, {
-          params: { mode: mode.value, limit: limit.value },
-        });
-        questions.value = res.data.vocabs.map(v => ({
-          ...v,
-        }));
-        currentIndex.value = 0;
-        userAnswer.value = "";
-        score.value = 0;
-        feedback.value = "";
-        answered.value = false;
-        finished.value = false;
-      } catch (err) {
-        console.error(err);
-        alert("Failed to load test words");
-      }
-    };
+const startTest = async () => {
+  const res = await testVocab(mode.value, limit.value);
+
+  if (!res) {
+    alert("Failed to load test words");
+    return;
+  }
+
+  questions.value = res.vocabs.map(v => ({ ...v }));
+  currentIndex.value = 0;
+  userAnswer.value = "";
+  score.value = 0;
+  feedback.value = "";
+  answered.value = false;
+  finished.value = false;
+};
+;
 
     const submitAnswer = () => {
       if (answered.value) return;
@@ -222,11 +220,7 @@ export default {
   background: #15803d !important;
 }
 
-/* Submit / Next buttons */
-::v-deep(.submit-btn) {
-  background: #22c55e !important;
-  color: white !important;
-}
+
 
 ::v-deep(.next-btn) {
   background: #6b7280 !important;

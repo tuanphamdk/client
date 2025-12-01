@@ -24,6 +24,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '@/helpers/api'; 
+import Swal from 'sweetalert2';
 
 export default {
   setup() {
@@ -31,15 +32,26 @@ export default {
     const email = ref('');
     const password = ref('');
 
-    const onLogin = async () => {
-      const result = await login(email.value, password.value);
-      if (result && result.token) {
-        localStorage.setItem('token', result.token);
-        router.push('/words');
-      } else {
-        alert('Login failed! Please check your email/password.');
-      }
-    };
+const onLogin = async () => {
+  const result = await login(email.value, password.value);
+  if (result && result.token) {
+    localStorage.setItem('token', result.token);
+    await Swal.fire({
+      icon: 'success',
+      title: 'Login Success!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    router.push('/words');
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: 'Please check your email/password.'
+    });
+  }
+};
+
 
     return { email, password, onLogin };
   }

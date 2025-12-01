@@ -29,6 +29,10 @@
           <router-link to="/test" class="item" v-if="isLoggedIn">
             <i class="edit icon"></i> Test
           </router-link>
+
+          <router-link to="/testMC" class="item" v-if="isLoggedIn">
+            <i class="question circle outline icon"></i> Multi
+          </router-link>
           <router-link v-if="isLoggedIn" to="/personal" class="item">
             <i class="user icon"></i> {{ username }}
           </router-link>

@@ -14,12 +14,11 @@
           <input type="text" required v-model="word.german" />
         </div>
 
-        <!-- Uncomment if needed
-        <div class="input-group">
+                <div class="input-group">
           <label><i class="vietnam flag"></i> Vietnamese</label>
-          <input type="text" v-model="word.vietnamese" />
+          <input type="text" required v-model="word.vietnamese" />
         </div>
-        -->
+
 
         <button type="submit" class="submit-btn">Update</button>
       </form>
@@ -31,6 +30,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getAllVocabById, updateVocab } from '../helpers/api';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Edit',
@@ -55,6 +55,11 @@ export default {
         alert('Failed to update word. Please try again later.');
         return;
       }
+            Swal.fire({
+        title:"Congratulations",
+        text:"Edit a new word successfully",
+        icon:"success"
+      });
       router.push('/words');
     };
 

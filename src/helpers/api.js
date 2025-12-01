@@ -100,10 +100,12 @@ export const login = async (email, password) => {
 export const register = async (username, email, password) => {
   try {
     const response = await axios.post(`${backendUrl}/auth/register`, { username, email, password });
-    return response.data; // { message, user }
+    return { data: response.data }; // luôn trả về object
   } catch (err) {
-    console.error(err);
-    return null;
+    if (err.response && err.response.data && err.response.data.error) {
+      return { error: err.response.data.error };
+    }
+    return { error: "Unknown error occurred." };
   }
 };
 
@@ -119,6 +121,20 @@ export const testVocab = async (mode = "english-to-german", limit = 5) => {
     return null;
   }
 };
+
+// Test multiple choice vocab
+export const testMultipleChoice = async (mode = "english-to-german",limit = 5) => {
+  try {
+    const response = await axios.get(`${backendUrl}/vocabs/test-mcq`, {
+      params: { mode,limit },
+    });
+    return response.data; // { requested, returned, questions: [...] }
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 
 
 
