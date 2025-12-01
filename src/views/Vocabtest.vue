@@ -181,7 +181,7 @@ const startTest = async () => {
   margin-bottom: 1rem !important;
 }
 
-/* Các button */
+
 ::v-deep(.toggle-btn),
 ::v-deep(.count-btn),
 ::v-deep(.start-btn),
@@ -194,11 +194,10 @@ const startTest = async () => {
   cursor: pointer !important;
 }
 
-/* Toggle active */
+
 ::v-deep(.toggle-btn.active) {
   background: #2563eb !important;
   color: white !important;
-  /* border-color: #2563eb !important; */
   box-shadow: 0 2px 8px rgba(37,99,235,0.4) !important;
 }
 
@@ -207,7 +206,7 @@ const startTest = async () => {
   color: white !important;
 }
 
-/* Start button */
+
 ::v-deep(.start-btn) {
   background: #16a34a !important;
   color: white !important;
@@ -231,7 +230,6 @@ const startTest = async () => {
   background: #9ca3af !important;
 }
 
-/* Input */
 ::v-deep(input[type="text"]) {
   width: 100% !important;
   padding: 0.75rem !important;
@@ -241,7 +239,6 @@ const startTest = async () => {
   text-align: center !important;
 }
 
-/* Feedback text */
 ::v-deep(.feedback) {
   margin-top: 0.5rem !important;
   font-weight: 500 !important;

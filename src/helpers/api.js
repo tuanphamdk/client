@@ -7,7 +7,8 @@ import axios from "axios";
 //     ? 'http://localhost:3000/api'
 //     : 'https://gereng.onrender.com/api';
 
-export const backendUrl = "http://localhost:3000/api";
+// export const backendUrl = "http://localhost:3000/api";
+export const backendUrl = 'https://server-zk3w.onrender.com/api';
 
     axios.interceptors.request.use(config => {
   const token = localStorage.getItem("token");
