@@ -63,11 +63,11 @@ const logout = async () => {
 
   width: 100%;
   text-align: center;
-  margin: 2rem auto;       /* căn giữa form */
-  font-size: 1rem;          /* font cơ bản */
+  margin: 2rem auto;      
+  font-size: 1rem;          
 }
 
-/* Label */
+
 .label {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -75,7 +75,7 @@ const logout = async () => {
   text-align: left;
 }
 
-/* Box chứa giá trị */
+
 .info-box {
   background-color: #f9fafb;
   border: 1px solid #d1d5db;
@@ -84,7 +84,7 @@ const logout = async () => {
   text-align: left;
 }
 
-/* Logout button */
+
 .logout-btn {
   padding: 10px 18px;
   border-radius: 12px;

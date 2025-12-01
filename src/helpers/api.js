@@ -1,11 +1,7 @@
 
 import axios from "axios";
 
-// Base API URL
-// const hostname = window.location.hostname;
-// const backendUrl = (hostname === 'localhost' || hostname === '127.0.0.1')
-//     ? 'http://localhost:3000/api'
-//     : 'https://gereng.onrender.com/api';
+
 
 // export const backendUrl = "http://localhost:3000/api";
 export const backendUrl = 'https://server-zk3w.onrender.com/api';
@@ -28,7 +24,7 @@ export const viewAllVocabs = async () => {
   } catch (err) {
     console.error(err);
     return null;
-  }
+  } 
 };
 
 // Get vocab by ID
@@ -101,7 +97,7 @@ export const login = async (email, password) => {
 export const register = async (username, email, password) => {
   try {
     const response = await axios.post(`${backendUrl}/auth/register`, { username, email, password });
-    return { data: response.data }; // luôn trả về object
+    return { data: response.data }; 
   } catch (err) {
     if (err.response && err.response.data && err.response.data.error) {
       return { error: err.response.data.error };
@@ -129,7 +125,7 @@ export const testMultipleChoice = async (mode = "english-to-german",limit = 5) =
     const response = await axios.get(`${backendUrl}/vocabs/test-mcq`, {
       params: { mode,limit },
     });
-    return response.data; // { requested, returned, questions: [...] }
+    return response.data;
   } catch (err) {
     console.error(err);
     return null;

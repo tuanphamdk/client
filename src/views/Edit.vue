@@ -69,9 +69,9 @@ export default {
 </script>
 
 <style scoped>
-/* Container căn giữa */
 
-/* Card */
+
+
 .form-card {
   background: white;
   border: 2px solid #d1d5db;
@@ -83,13 +83,12 @@ export default {
   text-align: center;
 }
 
-/* Title */
+
 h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-/* Input group */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -114,7 +113,7 @@ h1 {
   box-sizing: border-box;
 }
 
-/* Submit button */
+
 .submit-btn {
   padding: 14px 0;
   border-radius: 1rem;

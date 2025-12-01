@@ -1,7 +1,6 @@
 <template>
 <div class="vocab-test-container">
   <div class="vocab-card">
-    <!-- Test Settings -->
     <div v-if="questions.length === 0">
       <h1 class="text-2xl font-bold mb-4">Vocabulary Test</h1>
 
@@ -159,13 +158,13 @@ const startTest = async () => {
 
 <style scoped>
 
-/* Card chính giữa màn hình với border */
+
 ::v-deep(.vocab-test-container) {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  min-height: 100vh !important; /* chiếm full chiều cao màn hình */
-  background-color: #f3f4f6 !important; /* màu nền nhẹ */
+  min-height: 100vh !important; 
+  background-color: #f3f4f6 !important; 
 }
 
 

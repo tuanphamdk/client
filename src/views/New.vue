@@ -66,7 +66,7 @@ export default {
 }
 
 
-/* Input group */
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -87,7 +87,7 @@ export default {
   box-sizing: border-box;
 }
 
-/* Submit button */
+
 .submit-btn {
   padding: 10px 18px;
   border-radius: 12px;

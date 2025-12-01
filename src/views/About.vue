@@ -79,7 +79,7 @@ section {
 
 .about-logo {
   width: 200px;
-  height: auto; /* giữ đúng tỉ lệ */
+  height: auto;
 }
 
 </style>

@@ -5,7 +5,7 @@
       <div class="ui center aligned container">
         <div class="ui large secondary inverted pointing menu compact">
 
-          <!-- Luôn hiển thị -->
+
           <router-link v-if="isLoggedIn"  to="/words" class="item" >
             <i class="list icon"></i> Words
           </router-link>
@@ -16,7 +16,7 @@
             <i class="info circle icon"></i> About
           </router-link>
 
-          <!-- Chỉ hiển thị khi chưa login -->
+
           <router-link v-if="!isLoggedIn" to="/login" class="item">
             <i class="sign-in icon"></i> Login
           </router-link>
@@ -24,8 +24,6 @@
             <i class="user plus icon"></i> Register
           </router-link>
 
-
-          <!-- Chỉ hiển thị khi đã login -->
           <router-link to="/test" class="item" v-if="isLoggedIn">
             <i class="edit icon"></i> Test
           </router-link>
@@ -37,9 +35,6 @@
             <i class="user icon"></i> {{ username }}
           </router-link>
 
-          <!-- <a v-if="isLoggedIn" @click.prevent="logout" class="item">
-            <i class="sign-out icon"></i> Logout
-          </a> -->
         </div>
       </div>
     </div>
@@ -64,7 +59,7 @@ export default {
   data() {
     return {
       isLoggedIn: !!localStorage.getItem("token"),
-      username: '' // biến để hiển thị tên user
+      username: '' 
     };
   },
   created() {
@@ -102,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-/* Navbar basic styling */
+
 .ui.inverted.segment.navbar {
   margin-bottom: 20px;
 }

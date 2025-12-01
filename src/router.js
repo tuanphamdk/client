@@ -39,15 +39,15 @@
     routes
   });
 
-  // ===== Route Guard =====
+
   router.beforeEach((to, from, next) => {
     const token = localStorage.getItem("token");
     const protectedRoutes = ['/words', '/words/new', '/words/show', '/words/edit', '/personal'];
 
     if (protectedRoutes.some(path => to.path.startsWith(path)) && !token) {
-      next('/login'); // chưa login → chuyển hướng login
+      next('/login'); 
     } else {
-      next(); // đã login hoặc route không protected
+      next(); 
     }
   });
 

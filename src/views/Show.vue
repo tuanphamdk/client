@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 
-/* Card */
+
 .form-card {
   background: white;
   border: 2px solid #d1d5db;
@@ -56,13 +56,13 @@ export default {
   text-align: center;
 }
 
-/* Title */
+
 h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-/* Label */
+
 .label {
   font-weight: 600;
   margin-top: 1rem;
@@ -71,7 +71,7 @@ h1 {
   font-size: 1.1rem;
 }
 
-/* Info box (read-only) */
+
 .info-box {
   background-color: #f9fafb;
   border: 1px solid #d1d5db;
@@ -83,7 +83,7 @@ h1 {
   box-sizing: border-box;
 }
 
-/* Actions */
+
 .actions {
   margin-top: 2rem;
 }

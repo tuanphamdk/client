@@ -114,7 +114,7 @@ export default {
           text: "Your file has been deleted.",
           icon: "success",
         });
-        // Nếu xóa từ cuối trang, lùi trang nếu cần
+
         if (currentPage.value > totalPages.value) currentPage.value = totalPages.value || 1;
       }
     };
@@ -161,20 +161,20 @@ export default {
 
 .words-card {
   padding: 2rem;
-  max-width: 900px; /* Giới hạn rộng để bảng vừa khung */
+  max-width: 900px; 
   width: 100%;
-  overflow-x: auto; /* Nếu bảng rộng hơn card */
+  overflow-x: auto; 
   text-align: center;
 }
 
-/* Table căn giữa */
+
 .words-card table {
   width: 100%;
   margin-bottom: 1rem;
   text-align: left;
 }
 
-/* Pagination căn giữa */
+
 .words-card .ui.pagination.menu {
   justify-content: center;
 }

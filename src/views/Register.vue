@@ -41,7 +41,6 @@ const onRegister = async () => {
   const result = await register(username.value, email.value, password.value);
 
   if (result.error) {
-    // Hiển thị lỗi từ backend
     Swal.fire({
       icon: "error",
       title: "Register Failed",

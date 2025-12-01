@@ -27,7 +27,6 @@
       </div>
     </div>
 
-    <!-- Question UI -->
     <div v-if="questions.length > 0 && !finished"  class="question-box">
       <h3>Question {{ currentIndex + 1 }} / {{ questions.length }}</h3>
       <h2>{{ currentQuestion.question }}</h2>
@@ -174,8 +173,8 @@ export default {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  min-height: 100vh !important; /* chiếm full chiều cao màn hình */
-  background-color: #f3f4f6 !important; /* màu nền nhẹ */
+  min-height: 100vh !important; 
+  background-color: #f3f4f6 !important; 
 }
 
 .question-box {
@@ -189,8 +188,8 @@ export default {
 
 ::v-deep(.options){
   display: flex;
-  flex-direction: column; /* mỗi option 1 dòng */
-  gap: 12px; /* khoảng cách giữa các button */
+  flex-direction: column; 
+  gap: 12px;
   margin-top: 15px;
 }
 
@@ -221,7 +220,7 @@ export default {
   border-color: #a1a1aa !important;
 }
 
-/* Khi đã trả lời */
+
 ::v-deep(.option-btn.correct) {
   background-color: #16a34a !important;
   color: white;
@@ -261,7 +260,7 @@ export default {
   outline: none;
 }
 
-/* ::v-deep(.toggle-wrapper), */
+
 ::v-deep(.button-wrapper),
 ::v-deep(.count-wrapper){
   display: flex !important;
@@ -269,7 +268,7 @@ export default {
   align-items: center !important;
   gap: 12px !important;
   margin-bottom: 1rem !important;
-  margin-top: 20px; /* thêm khoảng cách với các option */
+  margin-top: 20px; 
 }
 
 ::v-deep(.count-btn.active)
