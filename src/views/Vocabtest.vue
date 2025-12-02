@@ -55,8 +55,8 @@
 
 <script>
 import { ref, computed } from "vue";
-import axios from "axios";
 import { testVocab } from "@/helpers/api";
+import Swal from 'sweetalert2';
 
 export default {
   name: "VocabTest",
@@ -79,8 +79,13 @@ export default {
 const startTest = async () => {
   const res = await testVocab(mode.value, limit.value);
 
-  if (!res) {
-    alert("Failed to load test words");
+  if (res.error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: res.error,
+      confirmButtonText: 'OK'
+    });
     return;
   }
 

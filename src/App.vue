@@ -9,12 +9,22 @@
           <router-link v-if="isLoggedIn"  to="/words" class="item" >
             <i class="list icon"></i> Words
           </router-link>
-          <router-link to="/words/new" class="item" v-if="isLoggedIn">
+          <router-link v-if="isLoggedIn" to="/words/new" class="item">
             <i class="plus icon"></i> New
           </router-link>
           <router-link v-if="!isLoggedIn" to="/about" class="item">
             <i class="info circle icon"></i> About
           </router-link>
+          <router-link to="/test" class="item" v-if="isLoggedIn">
+            <i class="edit icon"></i> Test
+          </router-link>
+          <router-link to="/testMC" class="item" v-if="isLoggedIn">
+            <i class="question circle outline icon"></i> Multi
+          </router-link>
+          <router-link v-if="isLoggedIn" to="/personal" class="item">
+            <i class="user icon"></i> {{ username }}
+          </router-link>
+
 
 
           <router-link v-if="!isLoggedIn" to="/login" class="item">
@@ -23,18 +33,6 @@
           <router-link v-if="!isLoggedIn" to="/register" class="item">
             <i class="user plus icon"></i> Register
           </router-link>
-
-          <router-link to="/test" class="item" v-if="isLoggedIn">
-            <i class="edit icon"></i> Test
-          </router-link>
-
-          <router-link to="/testMC" class="item" v-if="isLoggedIn">
-            <i class="question circle outline icon"></i> Multi
-          </router-link>
-          <router-link v-if="isLoggedIn" to="/personal" class="item">
-            <i class="user icon"></i> {{ username }}
-          </router-link>
-
         </div>
       </div>
     </div>

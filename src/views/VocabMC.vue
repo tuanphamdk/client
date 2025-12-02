@@ -66,6 +66,7 @@
 <script>
 import { testMultipleChoice } from '../helpers/api';
 import { ref, computed } from "vue";
+import Swal from 'sweetalert2';
 
 export default {
   name: "VocabMC",
@@ -83,21 +84,28 @@ export default {
       return questions.value[currentIndex.value] || {};
     });
 
-    const startTest = async() =>{
-        try{
-            const res = await testMultipleChoice(mode.value, limit.value);
-            questions.value = res.vocabs;
-            currentIndex.value = 0;
-            score.value = 0;
-            userAnswer.value = "";
-            answered.value = false;
-            finished.value = false;
-        } catch(err) {
-            console.error(err);
-            alert("cannot start test");
-        }
-    };
+const startTest = async () => {
+        const res = await testMultipleChoice(mode.value, limit.value);
+        
+    if (res.error) {
+        // Hiển thị lỗi bằng SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: res.error,
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
 
+        questions.value = res.vocabs;
+        currentIndex.value = 0;
+        score.value = 0;
+        userAnswer.value = "";
+        answered.value = false;
+        finished.value = false;
+
+};
     const selectAnswer = (opt) => {
         if(answered.value){
             return;

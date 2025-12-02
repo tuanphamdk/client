@@ -106,7 +106,6 @@ export const register = async (username, email, password) => {
   }
 };
 
-// Test vocab
 export const testVocab = async (mode = "english-to-german", limit = 5) => {
   try {
     const response = await axios.get(`${backendUrl}/vocabs/test-vocab`, {
@@ -115,20 +114,35 @@ export const testVocab = async (mode = "english-to-german", limit = 5) => {
     return response.data; // { requested, returned, mode, vocabs: [...] }
   } catch (err) {
     console.error(err);
-    return null;
+
+    // Nếu backend trả lỗi có message
+    if (err.response?.data?.error) {
+      return { error: err.response.data.error };
+    }
+
+    // fallback
+    return { error: "Failed to load test words. Please try again later." };
   }
 };
 
+
 // Test multiple choice vocab
-export const testMultipleChoice = async (mode = "english-to-german",limit = 5) => {
+export const testMultipleChoice = async (mode = "english-to-german", limit = 5) => {
   try {
     const response = await axios.get(`${backendUrl}/vocabs/test-mcq`, {
-      params: { mode,limit },
+      params: { mode, limit },
     });
     return response.data;
   } catch (err) {
     console.error(err);
-    return null;
+
+    // Nếu backend trả lỗi có message
+    if (err.response && err.response.data && err.response.data.error) {
+      return { error: err.response.data.error };
+    }
+
+    // fallback
+    return { error: "Cannot start test. Please try again later." };
   }
 };
 

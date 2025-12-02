@@ -77,7 +77,7 @@ export default {
       words.value = (await viewAllVocabs()) || [];
     });
 
-    // Computed để phân trang
+
     const paginatedWords = computed(() => {
       const start = (currentPage.value - 1) * pageSize.value;
       const end = start + pageSize.value;
@@ -86,7 +86,7 @@ export default {
 
     const totalPages = computed(() => Math.ceil(words.value.length / pageSize.value));
 
-    // Prev / Next
+
     const prevPage = () => {
       if (currentPage.value > 1) currentPage.value--;
     };

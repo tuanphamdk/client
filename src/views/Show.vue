@@ -10,6 +10,9 @@
       <p class="label">English:</p>
       <div class="info-box">{{ word.english }}</div>
 
+      <p class="label">Vietnamese:</p>
+      <div class="info-box">{{ word.vietnamese }}</div>
+
       <div class="actions">
         <router-link :to="{ name: 'Edit', params: { id: $route.params.id }}">
           Edit word

@@ -38,7 +38,10 @@ export default {
     const password = ref('');
 
 const onRegister = async () => {
-  const result = await register(username.value, email.value, password.value);
+  const result = await register(
+      username.value,
+      email.value, 
+      password.value);
 
   if (result.error) {
     Swal.fire({
