@@ -88,7 +88,6 @@ const startTest = async () => {
         const res = await testMultipleChoice(mode.value, limit.value);
         
     if (res.error) {
-        // Hiển thị lỗi bằng SweetAlert
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
